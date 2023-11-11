@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  movie-service:
+    container_name: movie-service-server
+    image: movie-service:1.0
+    build: .
+    restart: always
+    ports:
+      - 9012:9012
+    depends_on:
+      movie-service-mysqldb:
+        condition: service_started
+    networks:
+      - cineevent-net
+  
+  movie-service-mysqldb:
+    container_name: movie-service-mysqldb
+    image: mysql:8.0.35
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_movies
+      MYSQL_USER: nrpndr
+      MYSQL_PASSWORD: 1234
+    ports:
+      - 3309:3306
+    networks:
+      - cineevent-net
+
+volumes:
+  mongo:
+  
+networks:
+  cineevent-net:
+    external: true
+    name: user-service_cineevent-net
