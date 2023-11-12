@@ -13,7 +13,10 @@ import com.cineevent.movieservice.exceptions.MovieDoesNotExistException;
 import com.cineevent.movieservice.exceptions.ServiceCommunicationException;
 import com.cineevent.movieservice.exceptions.UserDoesNotHavePermissionException;
 
+import lombok.extern.log4j.Log4j2;
+
 @RestControllerAdvice
+@Log4j2
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler({InValidUserInputException.class})
@@ -40,6 +43,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler({ServiceCommunicationException.class})
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ResponseEntity<ErrorResponseDTO> handleServiceCommunicationException(RuntimeException ex) {
+		log.error("handleServiceCommunicationException", ex);
 		ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(ex.getMessage());
 		return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -47,6 +51,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler({Exception.class})
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ResponseEntity<ErrorResponseDTO> handleRemainingException(Exception ex) {
+		log.error("handleRemainingException", ex);
 		ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO("Unknown Internal Server Error");
 		return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
