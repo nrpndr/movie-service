@@ -71,4 +71,4 @@ This project contains also the [Postman export file](https://github.com/nrpndr/m
 - [Kubernetes](https://kubernetes.io/)
 - [Springdoc](https://springdoc.org/)
 - [Swagger](https://swagger.io/)
-* [Mysql](https://www.mysql.com/)
+- [Mysql](https://www.mysql.com/)
