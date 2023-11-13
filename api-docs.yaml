@@ -1,24 +1,30 @@
 openapi: 3.0.1
 info:
-  title: EventService
-  version: v0
+  title: MovieService
+  version: v1
 servers:
 - url: http://localhost:9012
-  description: Movie Service is a service that cares of maintaining movie data
+  description: Movie Service is a service that takes cares of maintaining movies data
 paths:
-  /events/{eventId}:
+  /movies/{movieId}:
     get:
       tags:
-      - events-controller
-      operationId: getEvent
+      - movies-controller
+      operationId: getMovie
       parameters:
-      - name: eventId
+      - name: movieId
         in: path
         required: true
         schema:
           type: integer
           format: int32
       responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
         "500":
           description: Internal Server Error
           content:
@@ -37,24 +43,18 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ErrorResponseDTO'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorResponseDTO'
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventResponseDTO'
+                $ref: '#/components/schemas/MovieResponseDTO'
     put:
       tags:
-      - events-controller
-      operationId: createOrUpdateEvent
+      - movies-controller
+      operationId: createOrUpdateMovie
       parameters:
-      - name: eventId
+      - name: movieId
         in: path
         required: true
         schema:
@@ -64,9 +64,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EventRequestDTO'
+              $ref: '#/components/schemas/MovieRequestDTO'
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
         "500":
           description: Internal Server Error
           content:
@@ -81,12 +87,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponseDTO'
         "404":
           description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorResponseDTO'
-        "400":
-          description: Bad Request
           content:
             '*/*':
               schema:
@@ -96,21 +96,27 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventResponseDTO'
+                $ref: '#/components/schemas/MovieResponseDTO'
       security:
       - bearer-key: []
     delete:
       tags:
-      - events-controller
-      operationId: deleteEvent
+      - movies-controller
+      operationId: deleteMovie
       parameters:
-      - name: eventId
+      - name: movieId
         in: path
         required: true
         schema:
           type: integer
           format: int32
       responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
         "500":
           description: Internal Server Error
           content:
@@ -125,12 +131,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponseDTO'
         "404":
           description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorResponseDTO'
-        "400":
-          description: Bad Request
           content:
             '*/*':
               schema:
@@ -145,10 +145,10 @@ paths:
       - bearer-key: []
     patch:
       tags:
-      - events-controller
-      operationId: updateEvent
+      - movies-controller
+      operationId: updateMovie
       parameters:
-      - name: eventId
+      - name: movieId
         in: path
         required: true
         schema:
@@ -158,9 +158,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EventRequestDTO'
+              $ref: '#/components/schemas/MovieRequestDTO'
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
         "500":
           description: Internal Server Error
           content:
@@ -175,12 +181,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponseDTO'
         "404":
           description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorResponseDTO'
-        "400":
-          description: Bad Request
           content:
             '*/*':
               schema:
@@ -190,15 +190,21 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventResponseDTO'
+                $ref: '#/components/schemas/MovieResponseDTO'
       security:
       - bearer-key: []
-  /events:
+  /movies:
     get:
       tags:
-      - events-controller
-      operationId: getAllEvents
+      - movies-controller
+      operationId: getAllMovies
       responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
         "500":
           description: Internal Server Error
           content:
@@ -213,12 +219,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponseDTO'
         "404":
           description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorResponseDTO'
-        "400":
-          description: Bad Request
           content:
             '*/*':
               schema:
@@ -230,18 +230,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/EventResponseDTO'
+                  $ref: '#/components/schemas/MovieResponseDTO'
     post:
       tags:
-      - events-controller
-      operationId: createEvent
+      - movies-controller
+      operationId: createMovie
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EventRequestDTO'
+              $ref: '#/components/schemas/MovieRequestDTO'
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorResponseDTO'
         "500":
           description: Internal Server Error
           content:
@@ -260,18 +266,12 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ErrorResponseDTO'
-        "400":
-          description: Bad Request
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ErrorResponseDTO'
         "200":
           description: OK
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/EventResponseDTO'
+                $ref: '#/components/schemas/MovieResponseDTO'
       security:
       - bearer-key: []
 components:
@@ -284,45 +284,45 @@ components:
         timestamp:
           type: integer
           format: int64
-    EventRequestDTO:
+    MovieRequestDTO:
       type: object
       properties:
-        name:
+        title:
           type: string
-        eventDate:
+        releaseDate:
           type: string
-        eventStartTime:
+        genre:
           type: string
-        eventDurationInMinutes:
+        movieDurationInMinutes:
           type: string
-        venue:
+        director:
           type: string
         description:
           type: string
-        artistNames:
+        cast:
           type: array
           items:
             type: string
-    EventResponseDTO:
+    MovieResponseDTO:
       type: object
       properties:
-        eventId:
+        movieId:
           type: integer
           format: int32
-        name:
+        title:
           type: string
-        eventDate:
+        releaseDate:
           type: string
-        eventStartTime:
+        genre:
           type: string
-        eventDurationInMinutes:
+        movieDurationInMinutes:
           type: integer
           format: int32
-        venue:
+        director:
           type: string
         description:
           type: string
-        artistNames:
+        cast:
           type: array
           items:
             type: string

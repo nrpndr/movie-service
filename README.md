@@ -1,5 +1,5 @@
 # review-service
-Review Service is a service that takes care of maintaining reviews and star rating for a movies and events
+Movie Service is a service that cares of maintaining movies data
 
 ## Getting Started
 It a spring boot project with Maven.
@@ -14,7 +14,7 @@ Clone the github Repo and import in IDE of your choice. \
 * [Spring security](https://spring.io/projects/spring-security)
 * [Swagger](https://swagger.io/)
 * [Docker](https://docs.docker.com/)
-* [Mongodb](https://www.mongodb.com/)
+* [Mysql](https://www.mysql.com/)
 
 ### Prerequisites
 - Java 17
@@ -32,30 +32,29 @@ Clone the github Repo and import in IDE of your choice. \
 #### Exposed REST apis
 Here below are the exposed REST Apis:
 
-* CRUD operation for movie reviews 
-* CRUD operation for event reviews
+* CRUD operation for movie
 
 ## REST apis details
 Using a browser it's possible to interact with the REST apis exposed by this service with Swagger:
 
-http://localhost:8081/reviewservice/swagger-ui.html
+http://localhost:9012/swagger-ui.html
 
-![Swagger](https://github.com/nrpndr/review-service/blob/main/swagger-ui.png "Swagger interface")
+![Swagger](https://github.com/nrpndr/movie-service/blob/main/swagger-ui.png "Swagger interface")
 
 Another alternative is to use Postman (https://www.postman.com/).
 
-This project contains also the [Postman export file](https://github.com/nrpndr/review-service/blob/main/ReviewService.postman_collection.json) with all the configured test calls:
+This project contains also the [Postman export file](https://github.com/nrpndr/movie-service/blob/main/MovieService.postman_collection.json) with all the configured test calls:
 
-![Postman](https://github.com/nrpndr/review-service/blob/main/postman-ui.png "Postman Collection")
+![Postman](https://github.com/nrpndr/movie-service/blob/main/postman-ui.png "Postman Collection")
 
 ### Running the project
 - To run the program, execute below commands in terminal at root level
 	
     ```
     mvn clean install
-    java -jar target/user-service.jar
+    java -jar target/movie-service.jar
     ```
-- Prerequisite to the above is that you need a have a local installation of mongodb. [User service](https://github.com/nrpndr/user-service) is required to perform create/update/delete operation.
+- Prerequisite to the above is that you need a have a local installation of mysqldb. [User service](https://github.com/nrpndr/user-service) is required to perform create/update/delete operation, as these operations are authenticated.
 - If you want to avoid all that hassle, simply do the following(You need to have docker desktop installed for this)
 	
     ```
@@ -72,4 +71,4 @@ This project contains also the [Postman export file](https://github.com/nrpndr/r
 - [Kubernetes](https://kubernetes.io/)
 - [Springdoc](https://springdoc.org/)
 - [Swagger](https://swagger.io/)
-- [Mongodb](https://www.mongodb.com/)
+* [Mysql](https://www.mysql.com/)
